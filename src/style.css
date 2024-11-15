@@ -1,10 +1,12 @@
 body {
     background-color: rgb(241, 241, 241);
     margin: 0px;
-    position: absolute;
+    position: fixed;
     top: 0px;
     left: 0px;
     --theme-accent-color: rgb(17, 133, 175);
+    --theme-action-color: rgb(14, 103, 135);
+    user-select: none;
 }
 
 header {
@@ -15,7 +17,7 @@ header {
     flex-direction: row;
     align-items: center;
     padding-left: 20px;
-    padding-bottom: 1px solid #e4e4e7;
+    border-bottom: 1px solid #e4e4e7;
     position: absolute;
     top: 0px;
     left: 0px;
@@ -26,6 +28,13 @@ header {
     font-family: Figtree;
     font-weight: 600;
     color: var(--theme-accent-color);
+}
+
+.headerdoctext {
+    font-size: 16px;
+    font-family: Figtree;
+    font-weight: 400;
+    color: var(--theme-action-color);
 }
 
 .intropanelbase {
@@ -43,8 +52,53 @@ header {
     margin-top: 20px;
 }
 
+.intropanel-button {
+    font-size: 15px;
+    font-family: Figtree;
+    font-weight: 500;
+    color: var(--theme-action-color);
+    margin-top: 15px;
+    cursor: pointer;
+}
+
 .intropanelleft {
     display: flex;
     flex-direction: column;
     align-items: center;
+}
+
+.editor-sidebar {
+    height: 100vh;
+    width: 325px;
+    background-color: #f7f7f7;
+    border-right: 1px solid #e4e4e7;
+}
+
+.searchbox {
+    height: 35px;
+    width: 30%;
+    margin-right: 35px;
+    margin-left: auto;
+    padding-left: 10px;
+    border: 1px solid #cacaca;
+    border-radius: 5px;
+    font-family: Figtree;
+}
+
+.blockhandle {
+    width: 10px;
+    height: 10px;
+    background-color: aqua;
+}
+
+.nblock {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+#movetestlist {
+    width: calc(100% - 40px);
+    height: calc(100% - 40px);
+    padding: 20px;
 }
