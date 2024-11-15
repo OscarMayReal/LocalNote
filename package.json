@@ -1,0 +1,15 @@
+{
+  "name": "localnote",
+  "version": "1.0.0",
+  "description": "LocalNote is a notes application that can store all its data on the local device, and be extended through extensions",
+  "main": "index.js",
+  "scripts": {
+    "test": "node index.js"
+  },
+  "author": "oscar",
+  "license": "ISC",
+  "dependencies": {
+    "electron": "^33.2.0",
+    "express": "^4.21.1"
+  }
+}
