@@ -253,10 +253,10 @@
             });
         } );
 
-        if (window.origin == "file://") {
-            console.log("electron")
-            $("#notebooksearch").css("margin-right", "175px")
-        }
+        // if (window.origin == "file://") {
+        //     console.log("electron")
+        //     $("#notebooksearch").css("margin-right", "175px")
+        // }
 
         var currentdoc = {
             "manifestver": 1.0,
@@ -447,5 +447,28 @@
 
         const urlParams = new URLSearchParams(document.location.search);
 
+        if ("launchQueue" in window) {
+            console.log("l1")
+            window.launchQueue.setConsumer((launchParams) => {
+                console.log("l2")
+                console.log(launchParams)
+                if (launchParams.files && launchParams.files.length) {
+                    console.log("l3")
+                    console.log(launchParams.files[0])
+                    launchParams.files[0].getFile()
+                    .then(fl => {
+                        fl.text().then(res => {
+                            console.log(res)
+                            currentdoc = JSON.parse(res)
+                            $("#docname").html(fl.name)
+                            currentdocfileitem = fl
+                            refreshsidebar()
+                            loadpage(0)
+                            $("#welcomedialog").remove()
+                        })
+                    })
+                }
+            });
+        }
     </script>
 </body>
