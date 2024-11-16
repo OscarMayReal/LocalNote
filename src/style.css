@@ -86,11 +86,16 @@ header {
 }
 
 .blockhandle {
-    min-width: 10px;
+    min-width: 20px;
     min-height: 100% !important;
-    background-color: rgba(0, 255, 255, 0);
+    background-color: rgba(85, 85, 85, 0);
     margin-right: 10px;
     cursor: grab;
+    border-radius: 2px;
+}
+
+.blockhandle:hover {
+    background-color: rgba(85, 85, 85, 0.156);
 }
 
 .nblock {
@@ -136,4 +141,17 @@ p {
     margin-bottom: 5px;
     font-size: 15px;
     font-family: Figtree;
+}
+
+li {
+    margin-top: 5px;
+    margin-bottom: 5px;
+    font-size: 15px;
+    font-family: Figtree;
+}
+
+.nblockul {
+    margin-top: 0px;
+    margin-bottom: 0px;
+    padding-left: 25px;
 }

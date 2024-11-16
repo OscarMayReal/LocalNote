@@ -16,8 +16,8 @@
             <div class="nblock"><div class="blockhandle"></div><h1 contenteditable class="editbox">LocalNote</h1></div>
             <div class="nblock"><div class="blockhandle"></div><p contenteditable class="editbox">This is LocalNote, a simple note-taking application that can run fully in the web browser.</p></div>
             <div class="nblock"><div class="blockhandle"></div><h3 contenteditable class="editbox">benefits</h3></div>
-            <div class="nblock"><div class="blockhandle"></div><p contenteditable class="editbox">fully local file saving</p></div>
-            <div class="nblock"><div class="blockhandle"></div><p contenteditable class="editbox">fully Simple, Block-Based Editor</p></div>
+            <div class="nblock"><div class="blockhandle"></div><ul class="nblockul"><li contenteditable class="editbox">fully local file saving</li></ul></div>
+            <div class="nblock"><div class="blockhandle"></div><ul class="nblockul"><li contenteditable class="editbox">fully Simple, Block-Based Editor</li></ul></div>
         </div>
     </div>
     <script>
@@ -28,9 +28,12 @@
             } else if (document.activeElement.innerHTML == "<br>" && ev.key == "Backspace") {
                 ev.preventDefault()
                 console.log($(activeelm).parent())
+                $(activeelm).parent().prev(".nblock").find(".editbox").focus()
                 $(activeelm).parent().remove()
             } else if (ev.key == "Enter") {
-                console.log(document.activeElement)
+                ev.preventDefault()
+                $(activeelm).parent().after('<div class="nblock"><div class="blockhandle"></div><p contenteditable class="editbox"></p></div>')
+                $(activeelm).parent().next(".nblock").find(".editbox").focus()
             }
             console.log(document.activeElement)
             activeelm = document.activeElement
