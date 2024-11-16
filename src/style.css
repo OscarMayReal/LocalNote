@@ -218,3 +218,19 @@ hr {
     margin-top: 10px;
     margin-bottom: 10px;
 }
+
+a {
+    text-decoration: none;
+}
+
+#welcomedialog {
+    display: flex;
+    place-items: center;
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    z-index: 200;
+    left: 0px;
+    top: 0px;
+    background-color: white;
+}
