@@ -4,7 +4,8 @@
   "description": "LocalNote is a notes application that can store all its data on the local device, and be extended through extensions",
   "main": "index.js",
   "scripts": {
-    "test": "node index.js"
+    "web": "node index.js",
+    "desk": "electron desktop.js"
   },
   "author": "oscar",
   "license": "ISC",

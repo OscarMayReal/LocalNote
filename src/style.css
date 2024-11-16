@@ -69,7 +69,7 @@ header {
 
 .editor-sidebar {
     height: 100vh;
-    width: 325px;
+    min-width: 325px;
     background-color: #f7f7f7;
     border-right: 1px solid #e4e4e7;
 }
@@ -86,19 +86,54 @@ header {
 }
 
 .blockhandle {
-    width: 10px;
-    height: 10px;
-    background-color: aqua;
+    min-width: 10px;
+    min-height: 100% !important;
+    background-color: rgba(0, 255, 255, 0);
+    margin-right: 10px;
+    cursor: grab;
 }
 
 .nblock {
     display: flex;
     flex-direction: row;
-    align-items: center;
+    /* align-items: center; */
+    height: fit-content;
 }
 
 #movetestlist {
-    width: calc(100% - 40px);
-    height: calc(100% - 40px);
-    padding: 20px;
+    width: calc(100% - 40%);
+    height: calc(100% - 80px);
+    padding: 40px;
+    padding-left: 20%;
+    padding-right: 20%;
+}
+
+h1 {
+    font-family: Figtree;
+    font-weight: 600 !important;
+    font-size: 40px; margin-bottom: 5px;
+}
+
+.editbox {
+    outline: rgba(255, 255, 255, 0) !important;
+    width: 100%;
+}
+
+h2 {
+    font-family: Figtree;
+    font-weight: 500 !important;
+    font-size: 35px; margin-bottom: 5px;
+}
+
+h3 {
+    font-family: Figtree;
+    font-weight: 500 !important;
+    font-size: 30px; margin-bottom: 5px;
+}
+
+p {
+    margin-top: 5px;
+    margin-bottom: 5px;
+    font-size: 15px;
+    font-family: Figtree;
 }
