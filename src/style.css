@@ -67,7 +67,7 @@ header {
     align-items: center;
 }
 
-.editor-sidebar {
+#editor-sidebar {
     height: 100vh;
     min-width: 325px;
     background-color: #f7f7f7;
@@ -86,12 +86,12 @@ header {
 }
 
 .blockhandle {
-    min-width: 20px;
+    min-width: 6px;
     min-height: 100% !important;
     background-color: rgba(85, 85, 85, 0);
-    margin-right: 10px;
+    margin-right: 20px;
     cursor: grab;
-    border-radius: 2px;
+    border-radius: 3px;
 }
 
 .blockhandle:hover {
@@ -127,13 +127,13 @@ h1 {
 h2 {
     font-family: Figtree;
     font-weight: 500 !important;
-    font-size: 35px; margin-bottom: 5px;
+    font-size: 30px; margin-bottom: 5px;
 }
 
 h3 {
     font-family: Figtree;
     font-weight: 500 !important;
-    font-size: 30px; margin-bottom: 5px;
+    font-size: 20px; margin-bottom: 5px;
 }
 
 p {
@@ -154,4 +154,19 @@ li {
     margin-top: 0px;
     margin-bottom: 0px;
     padding-left: 25px;
+    width: 100%;
+}
+
+.editbox[placeholder]:empty:last-child:before {
+    content: attr(placeholder);
+    color: #555; 
+    display: none;
+}
+
+#movetestlist .nblock:last-child .editbox[placeholder]:empty:before {
+    display: inline; /* Show only for the last block */
+}
+
+.markedhandle {
+    background-color: var(--theme-accent-color) !important;
 }
