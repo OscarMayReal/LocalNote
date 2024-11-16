@@ -26,9 +26,10 @@
     "screenshots": [
         {
             "src": "https://cloud-3dxdmmi20-hack-club-bot.vercel.app/0image.png",
-            "sizes": "2880x1800",
+            "sizes": "2987x1779",
             "type": "image/png",
-            "description": "A screenshot of the home page"
+            "description": "A screenshot of the home page",
+            "form_factor": "wide"
         }
     ]
 }
