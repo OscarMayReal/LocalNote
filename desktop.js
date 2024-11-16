@@ -3,10 +3,15 @@ const path = require('node:path')
 
 function createWindow () {
   const win = new BrowserWindow({
-    width: 800,
+    width: 1000,
     height: 600,
+    titleBarStyle: 'hidden',
+    titleBarOverlay: {
+        color: '#ffffff',
+        symbolColor: '#444444',
+        height: 59
+    }
   })
-
   win.loadFile('src/index.html')
 }
 

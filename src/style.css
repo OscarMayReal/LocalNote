@@ -21,6 +21,7 @@ header {
     position: absolute;
     top: 0px;
     left: 0px;
+    -webkit-app-region: drag;
 }
 
 .headertext {
@@ -91,6 +92,10 @@ header {
     align-items: center;
 }
 
+.sidemenuitemsel {
+    color: var(--theme-accent-color);
+}
+
 .searchbox {
     height: 35px;
     width: 30%;
@@ -100,6 +105,7 @@ header {
     border: 1px solid #cacaca;
     border-radius: 5px;
     font-family: Figtree;
+    -webkit-app-region: no-drag;
 }
 
 .blockhandle {
@@ -122,12 +128,20 @@ header {
     height: fit-content;
 }
 
-#movetestlist {
-    width: calc(100% - 40%);
+/* #movetestlist {
+    width: calc(100% - 30%);
     height: calc(100% - 80px);
     padding: 40px;
-    padding-left: 20%;
-    padding-right: 20%;
+    padding-left: 15%;
+    padding-right: 15%;
+} */
+
+#movetestlist {
+    width: calc(100% - 60px);
+    height: calc(100% - 80px);
+    padding: 40px;
+    padding-left: 30px;
+    padding-right: 30px;
 }
 
 h1 {

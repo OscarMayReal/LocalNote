@@ -6,7 +6,7 @@
 </head>
 <body onkeydown="handlekey(event)">
     <header>
-        <svg xmlns="http://www.w3.org/2000/svg" style="color: #555;" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-panel-left" onclick="$('#editor-sidebar').toggle()"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M9 3v18"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" style="color: #555; -webkit-app-region: no-drag;" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-panel-left" onclick="$('#editor-sidebar').toggle()"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M9 3v18"/></svg>
         <img src="logo.png" style="height: 30px; width: 30px; margin-right: 15px; margin-left: 15px;"></img>
         <div class="headertext">LocalNote: <div style="display: inline;" class="headerdoctext">notebookname</div></div>
         <input class="searchbox" placeholder="Search This Notebook, actions" id="notebooksearch"></input>
@@ -24,7 +24,7 @@
             </div>
             <div style="height: 20px;"></div>
             <div class="sectionheader">Pages</div>
-            <div class="sidemenuitem">
+            <div class="sidemenuitem sidemenuitemsel">
                 <div>🐈</div>
                 <div style="margin-left: 10px;">Page 1</div>
             </div>
@@ -35,7 +35,7 @@
         </div>
         <div id="movetestlist">
             <div class="nblock"><div class="blockhandle"></div><h1 placeholder="Press / to insert content" contenteditable class="editbox">LocalNote</h1></div>
-            <div class="nblock"><div class="blockhandle"></div><p placeholder="Press / to insert content" contenteditable class="editbox">This is LocalNote, a simple note-taking application that can run fully in the web browser.</p></div>
+            <div class="nblock"><div class="blockhandle"></div><p placeholder="Press / to insert content" contenteditable class="editbox">This is LocalNote, a simple note-taking application that can run fully in the web browser (or the electron app).</p></div>
             <div class="nblock"><div class="blockhandle"></div><h3 placeholder="Press / to insert content" contenteditable class="editbox">benefits</h3></div>
             <div class="nblock"><div class="blockhandle"></div><ul class="nblockul"><li placeholder="Press / to insert content" contenteditable class="editbox">fully local file saving</li></ul></div>
             <div class="nblock"><div class="blockhandle"></div><ul class="nblockul"><li placeholder="Press / to insert content" contenteditable class="editbox">Simple, Block-Based Editor</li></ul></div>
@@ -119,5 +119,9 @@
                 handle: ".blockhandle"
             });
         } );
+        if (window.origin == "file://") {
+            console.log("electron")
+            $("#notebooksearch").css("margin-right", "175px")
+        }
     </script>
 </body>
