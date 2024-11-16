@@ -117,6 +117,14 @@ header {
     border-radius: 3px;
 }
 
+.quoteline {
+    min-width: 3px;
+    min-height: 100% !important;
+    background-color: rgb(179, 179, 179);
+    margin-right: 8px;
+    border-radius: 1.5px;
+}
+
 .blockhandle:hover {
     background-color: rgba(85, 85, 85, 0.156);
 }
@@ -126,6 +134,7 @@ header {
     flex-direction: row;
     /* align-items: center; */
     height: fit-content;
+    padding-right: 20px;
 }
 
 /* #movetestlist {
@@ -142,6 +151,7 @@ header {
     padding: 40px;
     padding-left: 30px;
     padding-right: 30px;
+    overflow-y: scroll;
 }
 
 h1 {
@@ -200,4 +210,11 @@ li {
 
 .markedhandle {
     background-color: var(--theme-accent-color) !important;
+}
+
+hr {
+    color: #555;
+    width: 100%;
+    margin-top: 10px;
+    margin-bottom: 10px;
 }

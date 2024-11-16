@@ -19,26 +19,22 @@
                 <div style="margin-left: 10px;">Settings</div>
             </div>
             <div class="sidemenuitem">
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-bookmark"><path d="m19 21-7-4-7 4V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v16z"/></svg>
-                <div style="margin-left: 10px;">Bookmarks</div>
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-file-plus"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><path d="M9 15h6"/><path d="M12 18v-6"/></svg>
+                <div style="margin-left: 10px;">Add Page</div>
             </div>
             <div style="height: 20px;"></div>
             <div class="sectionheader">Pages</div>
-            <div class="sidemenuitem sidemenuitemsel">
-                <div>🐈</div>
-                <div style="margin-left: 10px;">Page 1</div>
-            </div>
-            <div class="sidemenuitem">
-                <div>😄</div>
-                <div style="margin-left: 10px;">Page 2</div>
+            <div id="pagelist">
+                
             </div>
         </div>
         <div id="movetestlist">
-            <div class="nblock"><div class="blockhandle"></div><h1 placeholder="Press / to insert content" contenteditable class="editbox">LocalNote</h1></div>
-            <div class="nblock"><div class="blockhandle"></div><p placeholder="Press / to insert content" contenteditable class="editbox">This is LocalNote, a simple note-taking application that can run fully in the web browser (or the electron app).</p></div>
-            <div class="nblock"><div class="blockhandle"></div><h3 placeholder="Press / to insert content" contenteditable class="editbox">benefits</h3></div>
-            <div class="nblock"><div class="blockhandle"></div><ul class="nblockul"><li placeholder="Press / to insert content" contenteditable class="editbox">fully local file saving</li></ul></div>
-            <div class="nblock"><div class="blockhandle"></div><ul class="nblockul"><li placeholder="Press / to insert content" contenteditable class="editbox">Simple, Block-Based Editor</li></ul></div>
+            <div class="nblock"><div class="blockhandle"></div><h1 placeholder="Press / to insert content" contenteditable class="editbox" onfocus="blockfocus()" onblur="blockblur()" onblur="blockblur()">LocalNote</h1></div>
+            <div class="nblock"><div class="blockhandle"></div><p placeholder="Press / to insert content" contenteditable class="editbox" onfocus="blockfocus()" onblur="blockblur()">This is LocalNote, a simple note-taking application that can run fully in the web browser (or the electron app).</p></div>
+            <div class="nblock"><div class="blockhandle"></div><hr></div>
+            <div class="nblock"><div class="blockhandle"></div><h3 placeholder="Press / to insert content" contenteditable class="editbox" onfocus="blockfocus()" onblur="blockblur()">benefits</h3></div>
+            <div class="nblock"><div class="blockhandle"></div><ul class="nblockul"><li placeholder="Press / to insert content" contenteditable class="editbox" onfocus="blockfocus()" onblur="blockblur()">fully local file saving</li></ul></div>
+            <div class="nblock"><div class="blockhandle"></div><ul class="nblockul"><li placeholder="Press / to insert content" contenteditable class="editbox" onfocus="blockfocus()" onblur="blockblur()">Simple, Block-Based Editor</li></ul></div>
         </div>
     </div>
     <script>
@@ -58,7 +54,7 @@
             }, 10);
             if (ev.ctrlKey == true && ev.key == " ") {
                 document.getElementById("notebooksearch").focus()
-                $(".markedhandle").removeClass("markedhandle")
+                // $(".markedhandle").removeClass("markedhandle")
                 console.log($(activeelm).parents(".nblock").find(".blockhandle"))
                 $(activeelm).parents(".nblock").find(".blockhandle").addClass("markedhandle")
             } else if (ev.key == "Backspace" && document.activeElement.classList.contains("editbox")) {
@@ -67,61 +63,167 @@
                     console.log($(activeelm).parents(".nblock"))
                     $(activeelm).parents(".nblock").prev(".nblock").find(".editbox").focus()
                     $(activeelm).parents(".nblock").remove()
-                    $(".markedhandle").removeClass("markedhandle")
+                    // $(".markedhandle").removeClass("markedhandle")
                 }
             } else if (ev.key == "Enter" && document.activeElement.classList.contains("editbox")) {
                 ev.preventDefault()
-                $(activeelm).parents(".nblock").after('<div class="nblock"><div class="blockhandle"></div><p placeholder="Press / to insert content" contenteditable class="editbox"></p></div>')
+                $(activeelm).parents(".nblock").after('<div class="nblock"><div class="blockhandle"></div><p placeholder="Press / to insert content" contenteditable class="editbox" onfocus="blockfocus()" onblur="blockblur()"></p></div>')
                 $(activeelm).parents(".nblock").next(".nblock").find(".editbox").focus()
-                $(".markedhandle").removeClass("markedhandle")
+                // $(".markedhandle").removeClass("markedhandle")
             } else if (document.activeElement.classList.contains("editbox")) {
-                $(".markedhandle").removeClass("markedhandle")
+                // $(".markedhandle").removeClass("markedhandle")
             } else if (ev.key == "Enter" && document.activeElement.classList.contains("searchbox")) {
                 ev.preventDefault()
                 console.log($(document.activeElement).val())
+                var sbval = $("#notebooksearch").val();
                 if ($(document.activeElement).val() == "!insert h1") {
-                    $(document.activeElement).val("")
-                    $(".markedhandle").parents(".nblock").after('<div class="nblock"><div class="blockhandle"></div><h1 placeholder="Press / to insert content" contenteditable class="editbox"></h1></div>')
+                    $(".markedhandle").parents(".nblock").after('<div class="nblock"><div class="blockhandle"></div><h1 placeholder="Press / to insert content" contenteditable class="editbox" onfocus="blockfocus()" onblur="blockblur()"></h1></div>')
                     $(".markedhandle").parents(".nblock").next(".nblock").find(".editbox").focus()
                     $(".markedhandle").parents(".nblock").remove()
                     $(".markedhandle").removeClass("markedhandle")
                 } else if ($(document.activeElement).val() == "!insert p") {
-                    $(document.activeElement).val("")
-                    $(".markedhandle").parents(".nblock").after('<div class="nblock"><div class="blockhandle"></div><p placeholder="Press / to insert content" contenteditable class="editbox"></p></div>')
+                    $(".markedhandle").parents(".nblock").after('<div class="nblock"><div class="blockhandle"></div><p placeholder="Press / to insert content" contenteditable class="editbox" onfocus="blockfocus()" onblur="blockblur()"></p></div>')
                     $(".markedhandle").parents(".nblock").next(".nblock").find(".editbox").focus()
                     $(".markedhandle").parents(".nblock").remove()
                     $(".markedhandle").removeClass("markedhandle")
                 } else if ($(document.activeElement).val() == "!insert li") {
-                    $(document.activeElement).val("")
-                    $(".markedhandle").parents(".nblock").after('<div class="nblock"><div class="blockhandle"></div><ul class="nblockul"><li placeholder="Press / to insert content" contenteditable class="editbox"></li></ul></div>')
+                    $(".markedhandle").parents(".nblock").after('<div class="nblock"><div class="blockhandle"></div><ul class="nblockul"><li placeholder="Press / to insert content" contenteditable class="editbox" onfocus="blockfocus()" onblur="blockblur()"></li></ul></div>')
                     $(".markedhandle").parents(".nblock").next(".nblock").find(".editbox").focus()
                     $(".markedhandle").parents(".nblock").remove()
                     $(".markedhandle").removeClass("markedhandle")
                 } else if ($(document.activeElement).val() == "!insert h2") {
-                    $(document.activeElement).val("")
-                    $(".markedhandle").parents(".nblock").after('<div class="nblock"><div class="blockhandle"></div><h2 placeholder="Press / to insert content" contenteditable class="editbox"></h2></div>')
+                    $(".markedhandle").parents(".nblock").after('<div class="nblock"><div class="blockhandle"></div><h2 placeholder="Press / to insert content" contenteditable class="editbox" onfocus="blockfocus()" onblur="blockblur()"></h2></div>')
                     $(".markedhandle").parents(".nblock").next(".nblock").find(".editbox").focus()
                     $(".markedhandle").parents(".nblock").remove()
                     $(".markedhandle").removeClass("markedhandle")
                 } else if ($(document.activeElement).val() == "!insert h3") {
-                    $(document.activeElement).val("")
-                    $(".markedhandle").parents(".nblock").after('<div class="nblock"><div class="blockhandle"></div><h3 placeholder="Press / to insert content" contenteditable class="editbox"></h3></div>')
+                    $(".markedhandle").parents(".nblock").after('<div class="nblock"><div class="blockhandle"></div><h3 placeholder="Press / to insert content" contenteditable class="editbox" onfocus="blockfocus()" onblur="blockblur()"></h3></div>')
                     $(".markedhandle").parents(".nblock").next(".nblock").find(".editbox").focus()
                     $(".markedhandle").parents(".nblock").remove()
                     $(".markedhandle").removeClass("markedhandle")
+                } else if ($(document.activeElement).val() == "!insert hline") {
+                    $(".markedhandle").parents(".nblock").after('<div class="nblock"><div class="blockhandle"></div><hr></div>')
+                    $(".markedhandle").parents(".nblock").next(".nblock").find(".editbox").focus()
+                    $(".markedhandle").parents(".nblock").remove()
+                    $(".markedhandle").removeClass("markedhandle")
+                } else if ($(document.activeElement).val() == "!insert quote") {
+                    $(".markedhandle").parents(".nblock").after('<div class="nblock"><div class="blockhandle"></div><div class="quoteline"></div><p placeholder="Press / to insert content" contenteditable class="editbox" onfocus="blockfocus()" onblur="blockblur()"></p></div>')
+                    $(".markedhandle").parents(".nblock").next(".nblock").find(".editbox").focus()
+                    $(".markedhandle").parents(".nblock").remove()
+                    $(".markedhandle").removeClass("markedhandle")
+                } else if (sbval.includes(">page")) {
+                    searchbcontent = $("#notebooksearch").val()
+                    searchterms = searchbcontent.split(" ").slice(1)
+                    console.log(searchterms)
+                    searchterm = ""
+                    searchterms.forEach(st => {
+                        searchterm = searchterm + st + " "
+                    })
+                    searchtermdone = searchterm.trimEnd()
+                    currentdoc.pages.forEach(pageitem => {
+                        console.log(pageitem.name + searchtermdone)
+                        if (pageitem.name.toLowerCase() == searchtermdone.toLowerCase()) {
+                            $("#movetestlist").html(pageitem.content)
+                        }
+                    })
                 }
+                $("#notebooksearch").val("")
             }
             console.log(document.activeElement)
             activeelm = document.activeElement
         } 
+
+        var blockfocus = function() {
+            setTimeout(() => {
+                if ($("#notebooksearch").val() == "") {
+                    $(".markedhandle").removeClass("markedhandle")
+                }
+                $(document.activeElement).parents(".nblock").find(".blockhandle").addClass("markedhandle")
+                $("#notebooksearch").val("")
+            }, 10);
+        }
+
+        var blockblur = function() {
+            $(".markedhandle").removeClass("markedhandle")
+        }
+
         $( function() {
             $( "#movetestlist" ).sortable({
                 handle: ".blockhandle"
             });
         } );
+
         if (window.origin == "file://") {
             console.log("electron")
             $("#notebooksearch").css("margin-right", "175px")
         }
+
+        var currentdoc = {
+            manifestver: 1.0,
+            pages: [
+                {
+                    name: "Welcome To LocalNote",
+                    emoji: "📖",
+                    content: `
+                        <div class="nblock"><div class="blockhandle"></div><h1 placeholder="Press / to insert content" contenteditable="" class="editbox" onfocus="blockfocus()" onblur="blockblur()">Welcome To LocalNote</h1></div>
+                        <div class="nblock"><div class="blockhandle"></div><p placeholder="Press / to insert content" contenteditable="" class="editbox" onfocus="blockfocus()" onblur="blockblur()">This is LocalNote, a simple note-taking application that can run fully in the web browser (or the electron app).</p></div>
+                        <div class="nblock"><div class="blockhandle"></div><hr></div>
+                        <div class="nblock"><div class="blockhandle"></div><h3 placeholder="Press / to insert content" contenteditable="" class="editbox" onfocus="blockfocus()" onblur="blockblur()">Features:</h3></div><div class="nblock"><div class="blockhandle"></div><ul class="nblockul"><li placeholder="Press / to insert content" contenteditable="" class="editbox" onfocus="blockfocus()" onblur="blockblur()" spellcheck="false" data-ms-editor="true">Multiple Pages</li></ul></div><div class="nblock"><div class="blockhandle"></div><ul class="nblockul"><li placeholder="Press / to insert content" contenteditable="" class="editbox" onfocus="blockfocus()" onblur="blockblur()" spellcheck="false" data-ms-editor="true">Block Based Editing (rearrangable)</li></ul></div><div class="nblock"><div class="blockhandle"></div><ul class="nblockul"><li placeholder="Press / to insert content" contenteditable="" class="editbox" onfocus="blockfocus()" onblur="blockblur()" spellcheck="false" data-ms-editor="true">extensions</li></ul></div><div class="nblock"><div class="blockhandle"></div><ul class="nblockul"><li placeholder="Press / to insert content" contenteditable="" class="editbox" onfocus="blockfocus()" onblur="blockblur()" spellcheck="false" data-ms-editor="true">saving locally</li></ul></div><div class="nblock"><div class="blockhandle"></div><h3 placeholder="Press / to insert content" contenteditable="" class="editbox" onfocus="blockfocus()" onblur="blockblur()" spellcheck="false" data-ms-editor="true">How to use?</h3></div><div class="nblock"><div class="blockhandle"></div><p placeholder="Press / to insert content" contenteditable="" class="editbox" onfocus="blockfocus()" onblur="blockblur()" spellcheck="false" data-ms-editor="true">Click "New Page" at the top of the sidebar to create a new page</p></div><div class="nblock"><div class="blockhandle"></div><h3 placeholder="Press / to insert content" contenteditable="" class="editbox" onfocus="blockfocus()" onblur="blockblur()" spellcheck="false" data-ms-editor="true">Demo</h3></div><div class="nblock"><div class="blockhandle"></div><p placeholder="Press / to insert content" contenteditable="" class="editbox" onfocus="blockfocus()" onblur="blockblur()" spellcheck="false" data-ms-editor="true">this is a demo notebook, look around, try editing the pages.</p></div>
+                    `,
+                },
+                {
+                    name: "Blocks",
+                    emoji: "🟦",
+                    content: `
+                        <div class="nblock"><div class="blockhandle"></div><h1 placeholder="Press / to insert content" contenteditable class="editbox" onfocus="blockfocus()" onblur="blockblur()" onblur="blockblur()">Blocks</h1></div>
+                        <div class="nblock"><div class="blockhandle"></div><p placeholder="Press / to insert content" contenteditable class="editbox" onfocus="blockfocus()" onblur="blockblur()">This page will explain some of the blocks availiable in LocalNote</p></div>
+                        <div class="nblock"><div class="blockhandle"></div><hr></div>
+                        <div class="nblock"><div class="blockhandle"></div><h3 placeholder="Press / to insert content" contenteditable class="editbox" onfocus="blockfocus()" onblur="blockblur()">Bullet Point</h3></div>
+                        <div class="nblock"><div class="blockhandle"></div><ul class="nblockul"><li placeholder="Press / to insert content" contenteditable class="editbox" onfocus="blockfocus()" onblur="blockblur()">This is a Bullet Point</li></ul></div>
+                        <div class="nblock"><div class="blockhandle"></div><p placeholder="Press / to insert content" contenteditable class="editbox" onfocus="blockfocus()" onblur="blockblur()">Block Code: li</p></div>
+                        <div class="nblock"><div class="blockhandle"></div><p placeholder="Press / to insert content" contenteditable class="editbox" onfocus="blockfocus()" onblur="blockblur()">use this block for making lists</p></div>
+                        <div class="nblock"><div class="blockhandle"></div><h3 placeholder="Press / to insert content" contenteditable class="editbox" onfocus="blockfocus()" onblur="blockblur()">Paragraph</h3></div>
+                        <div class="nblock"><div class="blockhandle"></div><p placeholder="Press / to insert content" contenteditable class="editbox" onfocus="blockfocus()" onblur="blockblur()">this is a Paragraph</p></div>
+                        <div class="nblock"><div class="blockhandle"></div><p placeholder="Press / to insert content" contenteditable class="editbox" onfocus="blockfocus()" onblur="blockblur()">Block Code: p</p></div>
+                        <div class="nblock"><div class="blockhandle"></div><p placeholder="Press / to insert content" contenteditable class="editbox" onfocus="blockfocus()" onblur="blockblur()">this is the block to use for regular text</p></div>
+                        <div class="nblock"><div class="blockhandle"></div><h3 placeholder="Press / to insert content" contenteditable class="editbox" onfocus="blockfocus()" onblur="blockblur()">Heading 1</h3></div>
+                        <div class="nblock"><div class="blockhandle"></div><h1 placeholder="Press / to insert content" contenteditable class="editbox" onfocus="blockfocus()" onblur="blockblur()">this is a Heading 1</h1></div>
+                        <div class="nblock"><div class="blockhandle"></div><p placeholder="Press / to insert content" contenteditable class="editbox" onfocus="blockfocus()" onblur="blockblur()">Block Code: h1</p></div>
+                        <div class="nblock"><div class="blockhandle"></div><p placeholder="Press / to insert content" contenteditable class="editbox" onfocus="blockfocus()" onblur="blockblur()">use this for the main title of your note</p></div>
+                        <div class="nblock"><div class="blockhandle"></div><h3 placeholder="Press / to insert content" contenteditable class="editbox" onfocus="blockfocus()" onblur="blockblur()">Heading 2</h3></div>
+                        <div class="nblock"><div class="blockhandle"></div><h2 placeholder="Press / to insert content" contenteditable class="editbox" onfocus="blockfocus()" onblur="blockblur()">this is a Heading 2</h2></div>
+                        <div class="nblock"><div class="blockhandle"></div><p placeholder="Press / to insert content" contenteditable class="editbox" onfocus="blockfocus()" onblur="blockblur()">Block Code: h2</p></div>
+                        <div class="nblock"><div class="blockhandle"></div><p placeholder="Press / to insert content" contenteditable class="editbox" onfocus="blockfocus()" onblur="blockblur()">use this for the 2nd level heading of your note</p></div>
+                        <div class="nblock"><div class="blockhandle"></div><h3 placeholder="Press / to insert content" contenteditable class="editbox" onfocus="blockfocus()" onblur="blockblur()">Heading 3</h3></div>
+                        <div class="nblock"><div class="blockhandle"></div><h3 placeholder="Press / to insert content" contenteditable class="editbox" onfocus="blockfocus()" onblur="blockblur()">this is a Heading 3</h3></div>
+                        <div class="nblock"><div class="blockhandle"></div><p placeholder="Press / to insert content" contenteditable class="editbox" onfocus="blockfocus()" onblur="blockblur()">Block Code: h3</p></div>
+                        <div class="nblock"><div class="blockhandle"></div><p placeholder="Press / to insert content" contenteditable class="editbox" onfocus="blockfocus()" onblur="blockblur()">use this for the 3rd level heading of your note</p></div>
+                        <div class="nblock"><div class="blockhandle"></div><h3 placeholder="Press / to insert content" contenteditable class="editbox" onfocus="blockfocus()" onblur="blockblur()">Horizontal Line</h3></div>
+                        <div class="nblock"><div class="blockhandle"></div><hr></div>
+                        <div class="nblock"><div class="blockhandle"></div><p placeholder="Press / to insert content" contenteditable class="editbox" onfocus="blockfocus()" onblur="blockblur()">Block Code: hline</p></div>
+                        <div class="nblock"><div class="blockhandle"></div><p placeholder="Press / to insert content" contenteditable class="editbox" onfocus="blockfocus()" onblur="blockblur()">use this to divide content in your note</p></div>
+                        <div class="nblock"><div class="blockhandle"></div><h3 placeholder="Press / to insert content" contenteditable class="editbox" onfocus="blockfocus()" onblur="blockblur()">Quote</h3></div>
+                        <div class="nblock"><div class="blockhandle"></div><div class="quoteline"></div><p placeholder="Press / to insert content" contenteditable class="editbox" onfocus="blockfocus()" onblur="blockblur()">This is a Quote</p></div>
+                        <div class="nblock"><div class="blockhandle"></div><p placeholder="Press / to insert content" contenteditable class="editbox" onfocus="blockfocus()" onblur="blockblur()">Block Code: quote</p></div>
+                        <div class="nblock"><div class="blockhandle"></div><p placeholder="Press / to insert content" contenteditable class="editbox" onfocus="blockfocus()" onblur="blockblur()">use this for quotes in your note</p></div>
+                    `,
+                }
+            ]
+        }
+
+        pagenum = 0
+        currentdoc.pages.forEach(pageitem => {
+            $("#pagelist").append(`<div class="sidemenuitem" onclick="loadpage(` + pagenum + `)">
+                <div>` + pageitem.emoji + `</div>
+                <div style="margin-left: 10px;">` + pageitem.name + `</div>
+            </div>`)
+            pagenum += 1
+        })
+
+        var loadpage = function(pn) {
+            $("#movetestlist").html(currentdoc.pages[pn].content)
+        }
+
+        var searchterm = ""
     </script>
 </body>
