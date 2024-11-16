@@ -186,6 +186,10 @@
                         newname = argsconcat.trimEnd()
                         currentdoc.pages[currentpagenum].emoji = newname
                         refreshsidebar()
+                    } else if (searchbcontent.split(" ").slice(1,2) == "delete") {
+                        currentdoc.pages.splice(currentpagenum, 1)
+                        loadpage(0)
+                        refreshsidebar()
                     }
                 }
                 $("#notebooksearch").val("")
@@ -196,18 +200,22 @@
             console.log(document.activeElement)
             activeelm = document.activeElement
             setTimeout(() => {
-                var lastselblock = $(".markedhandle")
-                $(lastselblock).removeClass("markedhandle")
-                currentdoc.pages[currentpagenum].content = $("#movetestlist").html()
-                $(lastselblock).addClass("markedhandle")
-                fileitem.createWritable()
-                .then(async (fws) => {
-                    await fws.truncate(0);
+                try {
+                    var lastselblock = $(".markedhandle")
+                    $(lastselblock).removeClass("markedhandle")
+                    currentdoc.pages[currentpagenum].content = $("#movetestlist").html()
+                    $(lastselblock).addClass("markedhandle")
+                    fileitem.createWritable()
+                    .then(async (fws) => {
+                        await fws.truncate(0);
 
-                    await fws.write(JSON.stringify(currentdoc));
+                        await fws.write(JSON.stringify(currentdoc));
 
-                    await fws.close();
-                })
+                        await fws.close();
+                    })
+                } catch {
+                    console.log("")
+                }
             }, 10);
         } 
 
@@ -298,10 +306,19 @@
             $("#pagelist").html("")
             pagenum = 0
             currentdoc.pages.forEach(pageitem => {
-                $("#pagelist").append(`<div class="sidemenuitem" onclick="loadpage(` + pagenum + `)">
-                    <div>` + pageitem.emoji + `</div>
-                    <div style="margin-left: 10px;">` + pageitem.name + `</div>
-                </div>`)
+                if(currentdoc.pages.length > 1) {
+                    pagenavitem = `<div class="sidemenuitem" onclick="loadpage(` + pagenum + `)">
+                        <div>` + pageitem.emoji + `</div>
+                        <div style="margin-left: 10px;">` + pageitem.name + `</div>
+                        <svg xmlns="http://www.w3.org/2000/svg" onclick="deletepage(` + pagenum + `, event)" style="margin-left: auto;" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-trash-2"><path d="M3 6h18"/><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/><line x1="10" x2="10" y1="11" y2="17"/><line x1="14" x2="14" y1="11" y2="17"/></svg>
+                    </div>`
+                } else {
+                    pagenavitem = `<div class="sidemenuitem" onclick="loadpage(` + pagenum + `)">
+                        <div>` + pageitem.emoji + `</div>
+                        <div style="margin-left: 10px;">` + pageitem.name + `</div>
+                    </div>`
+                }
+                $("#pagelist").append(pagenavitem)
                 pagenum += 1
             })
         }
@@ -324,6 +341,17 @@
                 "name": currentdoc.pages[currentpagenum].name,
                 "emoji": currentdoc.pages[currentpagenum].emoji,
                 "content": $("#movetestlist").html()
+            }
+        }
+
+        var deletepage = function(num, ev) {
+            ev.stopPropagation()
+            if(confirm("Do you want to delete the page \"" + currentdoc.pages[currentpagenum].name + "\"") == true) {
+                currentdoc.pages.splice(num, 1)
+                if(num == currentpagenum){
+                    loadpage(0)
+                }
+                refreshsidebar()
             }
         }
 
