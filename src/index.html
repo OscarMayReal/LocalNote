@@ -455,6 +455,7 @@
                 if (launchParams.files && launchParams.files.length) {
                     console.log("l3")
                     console.log(launchParams.files[0])
+                    fileitem = launchParams.files[0]
                     launchParams.files[0].getFile()
                     .then(fl => {
                         fl.text().then(res => {
