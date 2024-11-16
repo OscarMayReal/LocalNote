@@ -17,11 +17,13 @@
             </div>
         </div>
     </div>
-    <header>
-        <svg xmlns="http://www.w3.org/2000/svg" style="color: #555; -webkit-app-region: no-drag;" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-panel-left" onclick="$('#editor-sidebar').toggle()"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M9 3v18"/></svg>
-        <img src="logo.png" style="height: 30px; width: 30px; margin-right: 15px; margin-left: 15px;"></img>
-        <div class="headertext">LocalNote: <div style="display: inline;" class="headerdoctext" id="docname">notebookname</div></div>
-        <input class="searchbox" placeholder="Search This Notebook, actions" id="notebooksearch"></input>
+    <header class="fullwidth">
+        <div class="headercont">
+            <svg xmlns="http://www.w3.org/2000/svg" style="color: #555; -webkit-app-region: no-drag;" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-panel-left" onclick="$('#editor-sidebar').toggle()"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M9 3v18"/></svg>
+            <img src="logo.png" style="height: 30px; width: 30px; margin-right: 15px; margin-left: 15px;"></img>
+            <div class="headertext">LocalNote: <div style="display: inline;" class="headerdoctext" id="docname">notebookname</div></div>
+            <input class="searchbox" placeholder="Search This Notebook, actions" id="notebooksearch"></input>
+        </div>
     </header>
     <div style="display: flex; place-items: center; flex-direction: row; width: 100vw; height: calc(100vh - 60px); margin-top: 60px; ">
         <div id="editor-sidebar">

@@ -13,17 +13,28 @@ body {
 header {
     background-color: white;
     height: 60px;
-    width: env(titlebar-area-width);
+    width: 100vw;
     display: flex;
-    flex-direction: row;
-    align-items: center;
-    padding-left: 20px;
     padding-right: calc(100vw - env(titlebar-area-width));
     border-bottom: 1px solid #e4e4e7;
     position: absolute;
     top: 0px;
     left: 0px;
     -webkit-app-region: drag;
+}
+
+.headercont {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    position: absolute;
+    left: calc(env(titlebar-area-x, 0px) + 20px);
+    width: env(titlebar-area-width, 100vw);
+    height: 60px;
+}
+
+.fullwidth {
+    width: 100vw;
 }
 
 .headertext {
