@@ -18,7 +18,7 @@
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-cog"><path d="M12 20a8 8 0 1 0 0-16 8 8 0 0 0 0 16Z"/><path d="M12 14a2 2 0 1 0 0-4 2 2 0 0 0 0 4Z"/><path d="M12 2v2"/><path d="M12 22v-2"/><path d="m17 20.66-1-1.73"/><path d="M11 10.27 7 3.34"/><path d="m20.66 17-1.73-1"/><path d="m3.34 7 1.73 1"/><path d="M14 12h8"/><path d="M2 12h2"/><path d="m20.66 7-1.73 1"/><path d="m3.34 17 1.73-1"/><path d="m17 3.34-1 1.73"/><path d="m11 13.73-4 6.93"/></svg>
                 <div style="margin-left: 10px;">Settings</div>
             </div>
-            <div class="sidemenuitem">
+            <div class="sidemenuitem" onclick="addpage()">
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-file-plus"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><path d="M9 15h6"/><path d="M12 18v-6"/></svg>
                 <div style="margin-left: 10px;">Add Page</div>
             </div>
@@ -126,6 +126,34 @@
                             $("#movetestlist").html(pageitem.content)
                         }
                     })
+                } else if (sbval.includes("!page")) {
+                    searchbcontent = $("#notebooksearch").val()
+                    if (searchbcontent.split(" ").slice(1,2) == "add") {
+                        args = searchbcontent.split(" ").slice(2)
+                        console.log(args)
+                        argsconcat = ""
+                        args.forEach(st => {
+                            argsconcat = argsconcat + st + " "
+                        })
+                        pagenames = argsconcat.split("&").slice(0, 1)
+                        pnemoji = argsconcat.split("&").slice(1)
+                        console.log(searchbcontent)
+                        pagename = ""
+                        pagenames.forEach(st => {
+                            pagename = pagename + st + " "
+                        })
+                        pagenamedone = pagename.trimEnd()
+                        var newpage = {
+                            name: pagenamedone,
+                            emoji: pnemoji,
+                            content: `
+                                <div class="nblock"><div class="blockhandle"></div><h1 placeholder="Press / to insert content" contenteditable="" class="editbox" onfocus="blockfocus()" onblur="blockblur()"></h1></div>
+                            `,
+                        }
+                        currentdoc.pages.push(newpage)
+                        refreshsidebar()
+                        loadpage(currentdoc.pages.length - 1)
+                    }
                 }
                 $("#notebooksearch").val("")
             }
@@ -207,23 +235,47 @@
                         <div class="nblock"><div class="blockhandle"></div><p placeholder="Press / to insert content" contenteditable class="editbox" onfocus="blockfocus()" onblur="blockblur()">Block Code: quote</p></div>
                         <div class="nblock"><div class="blockhandle"></div><p placeholder="Press / to insert content" contenteditable class="editbox" onfocus="blockfocus()" onblur="blockblur()">use this for quotes in your note</p></div>
                     `,
+                },
+                {
+                    "name": "Command Bar",
+                    "emoji":"🔎",
+                    "content": "\n                                <div class=\"nblock\"><div class=\"blockhandle\"></div><h1 placeholder=\"Press / to insert content\" contenteditable=\"\" class=\"editbox\" onfocus=\"blockfocus()\" onblur=\"blockblur()\">🔎 Command Bar</h1></div><div class=\"nblock\"><div class=\"blockhandle\"></div><p placeholder=\"Press / to insert content\" contenteditable=\"\" class=\"editbox\" onfocus=\"blockfocus()\" onblur=\"blockblur()\">The command bar is an important method of navigation in LocalNote. This page will outline some of the commands you can use.</p></div><div class=\"nblock\"><div class=\"blockhandle\"></div><h2 placeholder=\"Press / to insert content\" contenteditable=\"\" class=\"editbox\" onfocus=\"blockfocus()\" onblur=\"blockblur()\">Namespaces</h2></div><div class=\"nblock\"><div class=\"blockhandle\"></div><p placeholder=\"Press / to insert content\" contenteditable=\"\" class=\"editbox\" onfocus=\"blockfocus()\" onblur=\"blockblur()\">Namespaces are groups of commands that you can perform in the command bar.</p></div><div class=\"nblock\"><div class=\"blockhandle\"></div><h3 placeholder=\"Press / to insert content\" contenteditable=\"\" class=\"editbox\" onfocus=\"blockfocus()\" onblur=\"blockblur()\">! - The Action Namespace</h3></div><div class=\"nblock\"><div class=\"blockhandle\"></div><p placeholder=\"Press / to insert content\" contenteditable=\"\" class=\"editbox\" onfocus=\"blockfocus()\" onblur=\"blockblur()\">This namespace contain all the actions that you can perform using the Command Bar</p></div><div class=\"nblock\"><div class=\"blockhandle\"></div><h3 placeholder=\"Press / to insert content\" contenteditable=\"\" class=\"editbox\" onfocus=\"blockfocus()\" onblur=\"blockblur()\">&gt; - The Navigation Namespace</h3></div><div class=\"nblock\"><div class=\"blockhandle\"></div><p placeholder=\"Press / to insert content\" contenteditable=\"\" class=\"editbox\" onfocus=\"blockfocus()\" onblur=\"blockblur()\">This namespace contains command for navigating around LocalNote.</p></div><div class=\"nblock\"><div class=\"blockhandle\"></div><h2 placeholder=\"Press / to insert content\" contenteditable=\"\" class=\"editbox\" onfocus=\"blockfocus()\" onblur=\"blockblur()\">Commands</h2></div><div class=\"nblock\"><div class=\"blockhandle\"></div><p placeholder=\"Press / to insert content\" contenteditable=\"\" class=\"editbox\" onfocus=\"blockfocus()\" onblur=\"blockblur()\">This is a list of commands you can perform in the Command Bar.</p></div><div class=\"nblock\"><div class=\"blockhandle\"></div><h3 placeholder=\"Press / to insert content\" contenteditable=\"\" class=\"editbox\" onfocus=\"blockfocus()\" onblur=\"blockblur()\">Creating a page</h3></div><div class=\"nblock\"><div class=\"blockhandle\"></div><div class=\"quoteline\"></div><p placeholder=\"Press / to insert content\" contenteditable=\"\" class=\"editbox\" onfocus=\"blockfocus()\" onblur=\"blockblur()\">!page add [pagename]&amp;[pageemoji]</p></div><div class=\"nblock\"><div class=\"blockhandle\"></div><p placeholder=\"Press / to insert content\" contenteditable=\"\" class=\"editbox\" onfocus=\"blockfocus()\" onblur=\"blockblur()\">This command adds a page at the end of the page list.</p></div><div class=\"nblock\"><div class=\"blockhandle\"></div><ul class=\"nblockul\"><li placeholder=\"Press / to insert content\" contenteditable=\"\" class=\"editbox\" onfocus=\"blockfocus()\" onblur=\"blockblur()\">[pagename]: The name of the page to be created.</li></ul></div><div class=\"nblock\"><div class=\"blockhandle\"></div><ul class=\"nblockul\"><li placeholder=\"Press / to insert content\" contenteditable=\"\" class=\"editbox\" onfocus=\"blockfocus()\" onblur=\"blockblur()\">[pageemoji]: The emoji icon of the page to be created.</li></ul></div><div class=\"nblock\"><div class=\"blockhandle\"></div><h3 placeholder=\"Press / to insert content\" contenteditable=\"\" class=\"editbox\" onfocus=\"blockfocus()\" onblur=\"blockblur()\">Navigating to a page</h3></div><div class=\"nblock\"><div class=\"blockhandle\"></div><div class=\"quoteline\"></div><p placeholder=\"Press / to insert content\" contenteditable=\"\" class=\"editbox\" onfocus=\"blockfocus()\" onblur=\"blockblur()\">&gt;page [pagename]</p></div><div class=\"nblock\"><div class=\"blockhandle\"></div><p placeholder=\"Press / to insert content\" contenteditable=\"\" class=\"editbox\" onfocus=\"blockfocus()\" onblur=\"blockblur()\">This command lets you navigate to a page by name.</p></div><div class=\"nblock\"><div class=\"blockhandle\"></div><ul class=\"nblockul\"><li placeholder=\"Press / to insert content\" contenteditable=\"\" class=\"editbox\" onfocus=\"blockfocus()\" onblur=\"blockblur()\">[pagename]: The name of the page you want to navigate to.</li></ul></div><div class=\"nblock\"><div class=\"blockhandle\"></div><h3 placeholder=\"Press / to insert content\" contenteditable=\"\" class=\"editbox\" onfocus=\"blockfocus()\" onblur=\"blockblur()\">Insert a block</h3></div><div class=\"nblock\"><div class=\"blockhandle\"></div><div class=\"quoteline\"></div><p placeholder=\"Press / to insert content\" contenteditable=\"\" class=\"editbox\" onfocus=\"blockfocus()\" onblur=\"blockblur()\">!insert [blockname]</p></div><div class=\"nblock\"><div class=\"blockhandle\"></div><p placeholder=\"Press / to insert content\" contenteditable=\"\" class=\"editbox\" onfocus=\"blockfocus()\" onblur=\"blockblur()\">This inserts a block into an empty block, acts the same as pressing / on an empty block</p></div><div class=\"nblock\"><div class=\"blockhandle\"></div><ul class=\"nblockul\"><li placeholder=\"Press / to insert content\" contenteditable=\"\" class=\"editbox\" onfocus=\"blockfocus()\" onblur=\"blockblur()\">[blockname]: The blockcode of the block to be inserted</li></ul></div>\n                            "
                 }
             ]
         }
 
-        pagenum = 0
-        currentdoc.pages.forEach(pageitem => {
-            $("#pagelist").append(`<div class="sidemenuitem" onclick="loadpage(` + pagenum + `)">
-                <div>` + pageitem.emoji + `</div>
-                <div style="margin-left: 10px;">` + pageitem.name + `</div>
-            </div>`)
-            pagenum += 1
-        })
+        var refreshsidebar = function() {
+            $("#pagelist").html("")
+            pagenum = 0
+            currentdoc.pages.forEach(pageitem => {
+                $("#pagelist").append(`<div class="sidemenuitem" onclick="loadpage(` + pagenum + `)">
+                    <div>` + pageitem.emoji + `</div>
+                    <div style="margin-left: 10px;">` + pageitem.name + `</div>
+                </div>`)
+                pagenum += 1
+            })
+        }
 
         var loadpage = function(pn) {
             $("#movetestlist").html(currentdoc.pages[pn].content)
+            currentpagenum = pn
+        }
+
+        var addpage = function() {
+            document.getElementById("notebooksearch").focus()
+            $(".markedhandle").removeClass("markedhandle")
+            $("#notebooksearch").val("!page add ");
         }
 
         var searchterm = ""
+
+        var getpagecont = function() {
+            return {
+                name: currentdoc.pages[currentpagenum].name,
+                emoji: currentdoc.pages[currentpagenum].emoji,
+                content: $("#pagelist").html()
+            }
+        }
+        refreshsidebar()
     </script>
 </body>
