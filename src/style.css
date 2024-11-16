@@ -68,10 +68,27 @@ header {
 }
 
 #editor-sidebar {
-    height: 100vh;
-    min-width: 325px;
+    height: calc(100% - 40px);
+    min-width: 260px;
     background-color: #f7f7f7;
     border-right: 1px solid #e4e4e7;
+    padding: 20px;
+}
+
+.sectionheader {
+    color: #787878;
+    font-family: Figtree;
+    font-size: 14px;
+}
+
+.sidemenuitem {
+    margin-top: 12px;
+    color: #555;
+    font-family: Figtree;
+    font-size: 17px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
 }
 
 .searchbox {
