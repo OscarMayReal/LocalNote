@@ -28,10 +28,10 @@
     <div style="display: flex; place-items: center; flex-direction: row; width: 100vw; height: calc(100vh - 60px); margin-top: 60px; ">
         <div id="editor-sidebar">
             <div class="sectionheader">System</div>
-            <div class="sidemenuitem">
+            <!-- <div class="sidemenuitem">
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-cog"><path d="M12 20a8 8 0 1 0 0-16 8 8 0 0 0 0 16Z"/><path d="M12 14a2 2 0 1 0 0-4 2 2 0 0 0 0 4Z"/><path d="M12 2v2"/><path d="M12 22v-2"/><path d="m17 20.66-1-1.73"/><path d="M11 10.27 7 3.34"/><path d="m20.66 17-1.73-1"/><path d="m3.34 7 1.73 1"/><path d="M14 12h8"/><path d="M2 12h2"/><path d="m20.66 7-1.73 1"/><path d="m3.34 17 1.73-1"/><path d="m17 3.34-1 1.73"/><path d="m11 13.73-4 6.93"/></svg>
                 <div style="margin-left: 10px;">Settings</div>
-            </div>
+            </div> -->
             <div class="sidemenuitem" onclick="addpage()">
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-file-plus"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><path d="M9 15h6"/><path d="M12 18v-6"/></svg>
                 <div style="margin-left: 10px;">Add Page</div>
@@ -130,12 +130,13 @@
                     searchterms = searchbcontent.split(" ").slice(1)
                     console.log(searchterms)
                     searchterm = ""
+                    searchtermdone = ""
                     searchterms.forEach(st => {
                         searchterm = searchterm + st + " "
                     })
                     searchtermdone = searchterm.trimEnd()
                     currentdoc.pages.forEach(pageitem => {
-                        console.log(pageitem.name + searchtermdone)
+                        console.log(pageitem.name.toLowerCase() + " " + searchtermdone.toLowerCase())
                         if (pageitem.name.toLowerCase() == searchtermdone.toLowerCase()) {
                             $("#movetestlist").html(pageitem.content)
                         }
@@ -372,7 +373,14 @@
         var fd = []
         var fileitem = ""
         var openfile = function() {
-            fd = showOpenFilePicker()
+            fd = showOpenFilePicker({
+                types: [{
+                    description: 'LocalNote NoteBook',
+                    accept: {
+                    'application/x-lnb': ['.LNB'],
+                    },
+                }],
+            })
             .then(ar => {
                 console.log(ar[0].getFile())
                 fileitem = ar[0]
@@ -393,7 +401,7 @@
 
         var createfile = function() {
             fd = window.showSaveFilePicker({
-                suggestedName: 'Untitled Notebook.txt',
+                suggestedName: 'Untitled Notebook.LNB',
                 types: [{
                     description: 'LocalNote NoteBook',
                     accept: {

@@ -1,9 +1,24 @@
-const express = require('express')
-const app = express()
-const port = 3000
+const { app, BrowserWindow } = require('electron/main')
+const path = require('node:path')
 
-app.use("/", express.static('src'))
+function createWindow () {
+  const win = new BrowserWindow({
+    width: 1000,
+    height: 600,
+    titleBarStyle: 'hidden',
+    titleBarOverlay: {
+        color: '#ffffff',
+        symbolColor: '#444444',
+        height: 59
+    }
+  })
+  win.loadFile('src/index.html')
+}
 
-app.listen(port, () => {
-  console.log(`LocalNote Server Running On ${port}`)
+app.whenReady().then(() => {
+  createWindow()
+})
+
+app.on('window-all-closed', () => {
+    app.quit()
 })

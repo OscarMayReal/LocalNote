@@ -4,13 +4,21 @@
   "description": "LocalNote is a notes application that can store all its data on the local device, and be extended through extensions",
   "main": "index.js",
   "scripts": {
-    "web": "node index.js",
-    "desk": "electron desktop.js"
+    "web": "node web.js",
+    "desk": "electron index.js",
+    "build-desk": "electron-builder"
   },
   "author": "oscar",
   "license": "ISC",
   "dependencies": {
-    "electron": "^33.2.0",
     "express": "^4.21.1"
+  },
+  "devDependencies": {
+    "electron": "^33.2.0",
+    "electron-builder": "^25.1.8",
+    "express": "^4.21.1"
+  },
+  "build": {
+    "appId": "com.quntemoss.localnote"
   }
 }
