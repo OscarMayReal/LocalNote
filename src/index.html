@@ -3,7 +3,8 @@
     <link rel="stylesheet" href="fonts.css"></link>
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     <script src="https://code.jquery.com/ui/1.14.1/jquery-ui.min.js"></script>
-    <link rel="manifest" href="manifest.json" />        
+    <link rel="manifest" href="manifest.json" />  
+    <script src="lib/jquery.mobile-events.js"></script>      
 </head>
 <body onkeydown="handlekey(event)">
     <div id="welcomedialog">
@@ -21,7 +22,7 @@
         <div class="headercont">
             <svg xmlns="http://www.w3.org/2000/svg" style="color: #555; -webkit-app-region: no-drag;" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-panel-left" onclick="$('#editor-sidebar').toggle()"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M9 3v18"/></svg>
             <img src="logo.png" style="height: 30px; width: 30px; margin-right: 15px; margin-left: 15px;"></img>
-            <div class="headertext">LocalNote: <div style="display: inline;" class="headerdoctext" id="docname">notebookname</div></div>
+            <div class="headertext" id="headertext">LocalNote: <div style="display: inline;" class="headerdoctext" id="docname">notebookname</div></div>
             <input class="searchbox" placeholder="Search This Notebook, actions" id="notebooksearch"></input>
         </div>
     </header>
@@ -122,6 +123,11 @@
                     $(".markedhandle").removeClass("markedhandle")
                 } else if ($(document.activeElement).val() == "!insert quote") {
                     $(".markedhandle").parents(".nblock").after('<div class="nblock"><div class="blockhandle"></div><div class="quoteline"></div><p placeholder="Press / to insert content" contenteditable class="editbox" onfocus="blockfocus()" onblur="blockblur()"></p></div>')
+                    $(".markedhandle").parents(".nblock").next(".nblock").find(".editbox").focus()
+                    $(".markedhandle").parents(".nblock").remove()
+                    $(".markedhandle").removeClass("markedhandle")
+                } else if ($(document.activeElement).val() == "!insert code") {
+                    $(".markedhandle").parents(".nblock").after('<div class="nblock"><div class="blockhandle"></div><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-play"><polygon points="6 3 20 12 6 21 6 3"/></svg><code placeholder="Press / to insert content" contenteditable class="editbox" onfocus="blockfocus()" onblur="blockblur()"></code></div>')
                     $(".markedhandle").parents(".nblock").next(".nblock").find(".editbox").focus()
                     $(".markedhandle").parents(".nblock").remove()
                     $(".markedhandle").removeClass("markedhandle")
@@ -258,6 +264,22 @@
         //     console.log("electron")
         //     $("#notebooksearch").css("margin-right", "175px")
         // }
+
+        window.addEventListener("resize", (event) => {
+            if (window.innerWidth < 700) {
+                $('#editor-sidebar').css("position", "absolute")
+                $('#editor-sidebar').hide()
+                $("#headertext").hide()
+                $("#notebooksearch").width("100%")
+                $('#editor-sidebar').width("calc(100% - 40px)")
+            } else {
+                $('#editor-sidebar').css("position", "relative")
+                $('#editor-sidebar').show()
+                $("#headertext").show()
+                $("#notebooksearch").width("30%")
+                $('#editor-sidebar').width("260px")
+            }
+        })
 
         var currentdoc = {
             "manifestver": 1.0,

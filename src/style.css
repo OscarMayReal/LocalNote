@@ -82,7 +82,7 @@ header {
 }
 
 #editor-sidebar {
-    height: calc(100% - 39px);
+    height: calc(100vh - 101px);
     min-width: 260px;
     background-color: #f7f7f7;
     border-right: 1px solid #e4e4e7;
